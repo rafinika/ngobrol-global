@@ -4,13 +4,18 @@ const cerita = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
-    tamu: z.string(),               // guest name
+    tamu: z.string().optional(),               // guest display name (existing episodes)
+    narasumberNama: z.string().optional(),      // guest display name (new episodes)
+    narasumberRole: z.string().optional(),
     narasumber: reference('narasumber').optional(), // link to full profile, if published
+    kampus: z.string().optional(),
     negara: z.string(),             // guest's country
     kota: z.string().optional(),    // guest's city
-    tanggal: z.date(),
-    ringkasan: z.string(),          // short summary for cards
+    tanggal: z.preprocess((v) => (v === '' || v == null ? undefined : v), z.coerce.date().optional()),
+    ringkasan: z.string().optional(),          // short summary for cards
     audioUrl: z.string().url().optional(),
+    youtubeUrl: z.string().url().optional(),
+    materiUrl: z.string().url().optional(),
     durasi: z.string().optional(),  // e.g. "42 min"
     tags: z.array(z.string()).default([]),
     unggulan: z.boolean().default(false), // featured on homepage

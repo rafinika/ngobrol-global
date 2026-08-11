@@ -16,25 +16,57 @@ interface Props {
 }
 const { entry } = Astro.props;
 const { Content } = await entry.render();
-const tanggalFormatted = new Intl.DateTimeFormat('id-ID', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-}).format(entry.data.tanggal);
+const tanggalFormatted = entry.data.tanggal
+  ? new Intl.DateTimeFormat('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }).format(entry.data.tanggal)
+  : null;
+
+const guestName = entry.data.tamu ?? entry.data.narasumberNama;
+
+function toEmbedUrl(url: string | undefined): string | null {
+  if (!url) return null;
+  const short = url.match(/youtu\.be\/([\w-]+)/);
+  const long  = url.match(/[?&]v=([\w-]+)/);
+  const id = short?.[1] ?? long?.[1];
+  return id ? `https://www.youtube.com/embed/${id}` : null;
+}
+
+function toMateriEmbedUrl(url: string | undefined): string | null {
+  if (!url) return null;
+  const slides = url.match(/docs\.google\.com\/presentation\/d\/([\w-]+)/);
+  if (slides) return `https://docs.google.com/presentation/d/${slides[1]}/embed?start=false&loop=false&delayms=3000`;
+  const drive = url.match(/drive\.google\.com\/file\/d\/([\w-]+)/);
+  if (drive) return `https://drive.google.com/file/d/${drive[1]}/preview`;
+  return null;
+}
+
+const embedUrl    = toEmbedUrl(entry.data.youtubeUrl);
+const materiEmbed = toMateriEmbedUrl(entry.data.materiUrl);
 ---
 <Base title={entry.data.title} description={entry.data.ringkasan}>
   <article class="story">
     <a class="back-link" href="/#cerita">&larr; Semua cerita</a>
-    <p class="story-origin">{entry.data.kota ? `${entry.data.kota}, ` : ''}{entry.data.negara} · {tanggalFormatted}</p>
+    <p class="story-origin">{entry.data.kota ? `${entry.data.kota}, ` : ''}{entry.data.negara}{tanggalFormatted ? ` · ${tanggalFormatted}` : ''}</p>
     <h1>{entry.data.title}</h1>
     <p class="story-meta">
-      <span>Bersama {entry.data.tamu}</span>
+      {guestName && <span>Bersama {guestName}</span>}
       {entry.data.durasi && <span>· {entry.data.durasi}</span>}
     </p>
 
     {entry.data.audioUrl && (
       <div class="audio-wrap">
         <audio controls src={entry.data.audioUrl}></audio>
+      </div>
+    )}
+
+    {embedUrl && (
+      <div class="video-wrapper">
+        <iframe
+          src={embedUrl}
+          title={`Rekaman ${entry.data.title}`}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
     )}
 
@@ -47,6 +79,29 @@ const tanggalFormatted = new Intl.DateTimeFormat('id-ID', {
     <div class="story-body">
       <Content />
     </div>
+
+    {materiEmbed && (
+      <section class="materi">
+        <h2>Materi Presentasi</h2>
+        <div class="materi-wrapper">
+          <iframe
+            src={materiEmbed}
+            title={`Materi ${entry.data.title}`}
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+        {entry.data.materiUrl && (
+          <p class="materi-link">
+            <a href={entry.data.materiUrl} target="_blank" rel="noopener">Buka materi di tab baru &rarr;</a>
+          </p>
+        )}
+      </section>
+    )}
+
+    {entry.data.youtubeUrl && !embedUrl && (
+      <p><a href={entry.data.youtubeUrl} target="_blank" rel="noopener">Tonton rekaman di YouTube &rarr;</a></p>
+    )}
   </article>
 
   <Komentar slug={entry.slug} />
@@ -112,4 +167,43 @@ const tanggalFormatted = new Intl.DateTimeFormat('id-ID', {
     margin-top: 2rem;
   }
   .story-body :global(a) { color: var(--accent-amber); }
+
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    margin: 1.5rem 0;
+    border-radius: 0.5rem;
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: 0;
+  }
+
+  .materi {
+    margin: 2rem 0 1rem;
+  }
+  .materi h2 {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin: 0 0 1rem;
+  }
+  .materi-wrapper {
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+  .materi-wrapper iframe {
+    width: 100%; height: 100%;
+    border: 1px solid var(--color-line, #dedad2);
+  }
+  .materi-link {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .materi-link a { color: var(--accent-amber); }
 </style>

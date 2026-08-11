@@ -4,7 +4,7 @@ import FormNewsletter from '../components/FormNewsletter.astro';
 import { getCollection } from 'astro:content';
 
 const semuaCerita = (await getCollection('cerita')).sort(
-  (a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf()
+  (a, b) => (b.data.tanggal?.valueOf() ?? 0) - (a.data.tanggal?.valueOf() ?? 0)
 );
 const unggulan = semuaCerita.find((c) => c.data.unggulan) ?? semuaCerita[0];
 const lainnya = semuaCerita.filter((c) => c.slug !== unggulan?.slug).slice(0, 5);
@@ -68,9 +68,9 @@ const kota = [
       <a class="episode-featured" href={`/cerita/${unggulan.slug}`}>
         <p class="episode-origin">{unggulan.data.kota ? `${unggulan.data.kota}, ` : ''}{unggulan.data.negara}</p>
         <h3>{unggulan.data.title}</h3>
-        <p class="episode-summary">{unggulan.data.ringkasan}</p>
+        <p class="episode-summary">{unggulan.data.ringkasan ?? unggulan.data.narasumberRole}</p>
         <p class="episode-meta">
-          <span>{unggulan.data.tamu}</span>
+          <span>{unggulan.data.tamu ?? unggulan.data.narasumberNama}</span>
           {unggulan.data.durasi && <span>· {unggulan.data.durasi}</span>}
         </p>
       </a>
@@ -83,7 +83,7 @@ const kota = [
             <a href={`/cerita/${c.slug}`}>
               <span class="episode-origin">{c.data.kota ? `${c.data.kota}, ` : ''}{c.data.negara}</span>
               <span class="episode-title">{c.data.title}</span>
-              <span class="episode-guest">{c.data.tamu}</span>
+              <span class="episode-guest">{c.data.tamu ?? c.data.narasumberNama}</span>
             </a>
           </li>
         ))}
