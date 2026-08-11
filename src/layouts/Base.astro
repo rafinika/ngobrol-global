@@ -15,7 +15,9 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title} · Ngobrol Global</title>
     <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="preconnect" href="https://fonts.bunny.net" />
     <link
       href="https://fonts.bunny.net/css?family=fraunces:400,500,600,600i,700|ibm-plex-sans:400,500,600|ibm-plex-mono:400,500"
@@ -26,7 +28,7 @@ const {
     <a class="skip-link" href="#konten">Langsung ke konten</a>
     <header class="site-header">
       <a class="wordmark" href="/">
-        <span class="wordmark-mark" aria-hidden="true">NG</span>
+        <img class="wordmark-mark" src="/logo.svg" alt="" width="28" height="28" />
         <span class="wordmark-text">Ngobrol Global</span>
       </a>
       <nav class="site-nav" aria-label="Navigasi utama">
@@ -56,16 +58,16 @@ const {
 
     <style is:global>
       :root {
-        --bg-night: #12172a;
-        --bg-night-soft: #1a2140;
-        --bg-panel: #efe7d8;
-        --ink: #1c2033;
-        --ink-soft: #e7e2d2;
-        --ink-muted: #a9aec4;
-        --accent-amber: #e2a33b;
-        --accent-teal: #4a9b8e;
-        --line: rgba(231, 226, 210, 0.16);
-        --line-strong: rgba(231, 226, 210, 0.32);
+        --bg-night: #faf8f4;
+        --bg-night-soft: #ffffff;
+        --bg-panel: #ffffff;
+        --ink: #0c2f52;
+        --ink-soft: #0c2f52;
+        --ink-muted: #5f5e5a;
+        --accent-amber: #d85a30;
+        --accent-teal: #0c2f52;
+        --line: rgba(12, 47, 82, 0.12);
+        --line-strong: rgba(12, 47, 82, 0.22);
 
         --font-display: 'Fraunces', 'Iowan Old Style', serif;
         --font-body: 'IBM Plex Sans', system-ui, sans-serif;
@@ -100,7 +102,7 @@ const {
         color: var(--ink);
         padding: 0.75rem 1.25rem;
         z-index: 100;
-        font-family: var(--font-mono);
+        font-family: var(--font-body);
       }
       .skip-link:focus {
         left: 1rem;
@@ -132,13 +134,9 @@ const {
         color: var(--ink-soft);
       }
       .wordmark-mark {
-        font-family: var(--font-mono);
-        font-size: 0.75rem;
-        letter-spacing: 0.12em;
-        border: 1px solid var(--line-strong);
-        border-radius: 4px;
-        padding: 0.3rem 0.45rem;
-        color: var(--accent-amber);
+        width: 28px;
+        height: 28px;
+        flex-shrink: 0;
       }
       .wordmark-text {
         font-family: var(--font-display);
@@ -150,7 +148,7 @@ const {
         display: flex;
         align-items: center;
         gap: clamp(1rem, 3vw, 2rem);
-        font-family: var(--font-mono);
+        font-family: var(--font-body);
         font-size: 0.85rem;
       }
       .site-nav a {
@@ -195,14 +193,14 @@ const {
       .footer-links {
         display: flex;
         gap: 1.5rem;
-        font-family: var(--font-mono);
+        font-family: var(--font-body);
         font-size: 0.8rem;
       }
       .footer-links a { text-decoration: none; color: var(--ink-muted); }
       .footer-links a:hover { color: var(--accent-amber); }
       .footer-fine {
         margin: 2rem 0 0;
-        font-family: var(--font-mono);
+        font-family: var(--font-body);
         font-size: 0.75rem;
         color: var(--ink-muted);
       }
