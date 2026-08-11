@@ -1,0 +1,306 @@
+---
+import Base from '../layouts/Base.astro';
+import FormNewsletter from '../components/FormNewsletter.astro';
+import { getCollection } from 'astro:content';
+
+const semuaCerita = (await getCollection('cerita')).sort(
+  (a, b) => b.data.tanggal.valueOf() - a.data.tanggal.valueOf()
+);
+const unggulan = semuaCerita.find((c) => c.data.unggulan) ?? semuaCerita[0];
+const lainnya = semuaCerita.filter((c) => c.slug !== unggulan?.slug).slice(0, 5);
+
+// Cities featured in the "bridge" strip — one per country a narasumber has
+// joined the show from so far.
+const kota = [
+  { nama: 'Jakarta', tz: 'Asia/Jakarta' },
+  { nama: 'Amsterdam', tz: 'Europe/Amsterdam' },
+  { nama: 'Stockholm', tz: 'Europe/Stockholm' },
+  { nama: 'Seoul', tz: 'Asia/Seoul' },
+  { nama: 'Washington DC', tz: 'America/New_York' },
+  { nama: 'Ghent', tz: 'Europe/Brussels' },
+  { nama: 'Tsukuba', tz: 'Asia/Tokyo' },
+];
+---
+<Base title="Beranda">
+  <section class="hero">
+    <p class="eyebrow">PODCAST WAWANCARA LINTAS NEGARA</p>
+    <h1>Jembatan Cerita<br />Menuju Dunia Global</h1>
+    <p class="hero-lede">
+      Ngobrol Global menghubungkan pendengar di Indonesia dengan suara-suara dari
+      berbagai penjuru dunia — satu percakapan, satu kota, satu perspektif baru
+      setiap episode.
+    </p>
+    <div class="hero-actions">
+      {unggulan && (
+        <a class="btn btn-primary" href={`/cerita/${unggulan.slug}`}>Dengarkan episode terbaru</a>
+      )}
+      <a class="btn btn-ghost" href="/daftar">Daftar jadi tamu</a>
+    </div>
+  </section>
+
+  <section class="bridge" aria-label="Kota-kota tempat tamu bergabung">
+    <svg class="bridge-line" viewBox="0 0 1000 60" preserveAspectRatio="none" aria-hidden="true">
+      <path
+        d="M0,45 C 80,10 160,10 220,45 C 280,10 360,10 420,45 C 480,10 560,10 620,45 C 680,10 760,10 820,45 C 880,10 960,10 1000,45"
+        fill="none"
+        stroke="var(--line-strong)"
+        stroke-width="1.5"
+      />
+    </svg>
+    <ul class="bridge-cities">
+      {kota.map((k) => (
+        <li data-tz={k.tz}>
+          <span class="city-dot" aria-hidden="true"></span>
+          <span class="city-name">{k.nama}</span>
+          <span class="city-time" data-time>--:--</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section id="cerita" class="cerita-section">
+    <div class="section-heading">
+      <p class="eyebrow">CERITA</p>
+      <h2>Episode terbaru</h2>
+    </div>
+
+    {unggulan && (
+      <a class="episode-featured" href={`/cerita/${unggulan.slug}`}>
+        <p class="episode-origin">{unggulan.data.kota ? `${unggulan.data.kota}, ` : ''}{unggulan.data.negara}</p>
+        <h3>{unggulan.data.title}</h3>
+        <p class="episode-summary">{unggulan.data.ringkasan}</p>
+        <p class="episode-meta">
+          <span>{unggulan.data.tamu}</span>
+          {unggulan.data.durasi && <span>· {unggulan.data.durasi}</span>}
+        </p>
+      </a>
+    )}
+
+    {lainnya.length > 0 && (
+      <ul class="episode-list">
+        {lainnya.map((c) => (
+          <li>
+            <a href={`/cerita/${c.slug}`}>
+              <span class="episode-origin">{c.data.kota ? `${c.data.kota}, ` : ''}{c.data.negara}</span>
+              <span class="episode-title">{c.data.title}</span>
+              <span class="episode-guest">{c.data.tamu}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )}
+
+    {semuaCerita.length === 0 && (
+      <p class="empty-state">
+        Belum ada episode yang dipublikasikan. Tambahkan file Markdown baru di
+        <code>src/content/cerita/</code> untuk mulai mengisi halaman ini.
+      </p>
+    )}
+  </section>
+
+  <section id="tentang" class="tentang">
+    <div class="section-heading">
+      <p class="eyebrow">TENTANG</p>
+      <h2>Kenapa Ngobrol Global?</h2>
+    </div>
+    <p>
+      Setiap episode adalah satu jembatan kecil — menghubungkan pengalaman
+      seseorang di kota lain dengan pendengar di Indonesia. Kami percaya
+      cerita personal adalah cara paling jujur untuk memahami dunia yang
+      lebih luas dari yang bisa kita jangkau sendiri.
+    </p>
+  </section>
+
+  <section id="newsletter" class="newsletter">
+    <div class="section-heading">
+      <p class="eyebrow">TETAP TERHUBUNG</p>
+      <h2>Dapatkan episode baru di kotak masuk</h2>
+    </div>
+    <p class="newsletter-lede">Satu email tiap episode baru rilis. Tanpa spam.</p>
+    <FormNewsletter />
+  </section>
+</Base>
+
+<style>
+  .hero {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(3rem, 8vw, 6rem) clamp(1.25rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3rem);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent-amber);
+    margin: 0 0 1rem;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.5rem;
+    max-width: 18ch;
+  }
+  .hero-lede {
+    max-width: 42ch;
+    font-size: 1.1rem;
+    color: var(--ink-muted);
+    margin: 0 0 2.25rem;
+  }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; }
+  .btn {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-decoration: none;
+    padding: 0.85rem 1.5rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+  }
+  .btn-primary { background: var(--accent-amber); color: var(--ink); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { border-color: var(--line-strong); color: var(--ink-soft); }
+  .btn-ghost:hover { border-color: var(--accent-amber); color: var(--accent-amber); }
+
+  /* ---- Bridge / timezone strip: the page's signature element ---- */
+  .bridge {
+    position: relative;
+    max-width: 1180px;
+    margin: 0 auto clamp(3rem, 6vw, 5rem);
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+  }
+  .bridge-line { display: block; width: 100%; height: 44px; }
+  .bridge-cities {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 1.25rem;
+    margin: -0.6rem 0 0;
+    padding: 0;
+    gap: 0.5rem 1rem;
+  }
+  .bridge-cities li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--ink-muted);
+    text-align: center;
+  }
+  .city-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent-teal);
+  }
+  .city-name { color: var(--ink-soft); }
+  .city-time { color: var(--accent-amber); }
+
+  .section-heading { margin-bottom: 1.75rem; }
+  .section-heading h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .cerita-section, .tentang, .newsletter {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+    border-top: 1px solid var(--line);
+  }
+
+  .episode-featured {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background: var(--bg-night-soft);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;
+    transition: border-color 0.15s ease;
+  }
+  .episode-featured:hover { border-color: var(--accent-amber); }
+  .episode-origin {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin: 0 0 0.75rem;
+  }
+  .episode-featured h3 {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 1.9rem);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+  .episode-summary { color: var(--ink-muted); margin: 0 0 1rem; max-width: 60ch; }
+  .episode-meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--ink-muted); margin: 0; }
+  .episode-meta span + span { margin-left: 0.5rem; }
+
+  .episode-list { list-style: none; margin: 0; padding: 0; }
+  .episode-list li { border-top: 1px solid var(--line); }
+  .episode-list a {
+    display: grid;
+    grid-template-columns: 10rem 1fr auto;
+    gap: 1rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .episode-list .episode-origin { margin: 0; }
+  .episode-list .episode-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+  .episode-list .episode-guest {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+  }
+  .episode-list a:hover .episode-title { color: var(--accent-amber); }
+
+  @media (max-width: 640px) {
+    .episode-list a { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+
+  .empty-state {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+  }
+  .empty-state code {
+    background: var(--bg-night-soft);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .tentang p { max-width: 62ch; font-size: 1.05rem; color: var(--ink-soft); }
+  .newsletter-lede { color: var(--ink-muted); margin: -0.75rem 0 1.5rem; }
+</style>
+
+<script>
+  // Populate each city's local time in the bridge strip.
+  document.querySelectorAll('.bridge-cities li[data-tz]').forEach((li) => {
+    const tz = (li as HTMLElement).dataset.tz;
+    const timeEl = li.querySelector('[data-time]');
+    if (!tz || !timeEl) return;
+    const update = () => {
+      timeEl.textContent = new Intl.DateTimeFormat('id-ID', {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: tz,
+      }).format(new Date());
+    };
+    update();
+    setInterval(update, 30000);
+  });
+</script>

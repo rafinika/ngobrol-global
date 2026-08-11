@@ -1,0 +1,46 @@
+---
+interface Props {
+  slug: string;
+}
+const { slug } = Astro.props;
+// After step 5 (setup Giscus at https://giscus.app), fill in the four
+// values below from the generated snippet. `data-term` is set to the
+// story's slug so every /cerita/[slug] page gets its own discussion thread.
+---
+<section class="komentar" aria-label="Komentar">
+  <h2 class="komentar-heading">Diskusi</h2>
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="REPLACE_WITH_ORG/REPLACE_WITH_REPO"
+    data-repo-id="REPLACE_WITH_REPO_ID"
+    data-category="Comments"
+    data-category-id="REPLACE_WITH_CATEGORY_ID"
+    data-mapping="specific"
+    data-term={slug}
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="bottom"
+    data-theme="dark_dimmed"
+    data-lang="id"
+    crossorigin="anonymous"
+    async
+  ></script>
+</section>
+
+<style>
+  .komentar {
+    max-width: 42rem;
+    margin: 3rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  .komentar-heading {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0 0 1rem;
+  }
+</style>

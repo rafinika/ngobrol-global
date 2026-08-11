@@ -1,0 +1,106 @@
+---
+// Posts to the Google Apps Script Web App (Sheet: Newsletter).
+// Replace APPS_SCRIPT_URL once the Apps Script Web App from step 3 is deployed.
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec';
+---
+<form
+  class="newsletter-form"
+  data-endpoint={APPS_SCRIPT_URL}
+  data-type="newsletter"
+>
+  <label for="newsletter-email" class="visually-hidden">Alamat email</label>
+  <input
+    id="newsletter-email"
+    name="email"
+    type="email"
+    required
+    placeholder="nama@email.com"
+    autocomplete="email"
+  />
+  <button type="submit">Berlangganan</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    max-width: 30rem;
+  }
+  .newsletter-form input {
+    flex: 1 1 14rem;
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+  }
+  .newsletter-form input::placeholder { color: var(--ink-muted); }
+  .newsletter-form input:focus { border-color: var(--accent-amber); }
+  .newsletter-form button {
+    background: var(--accent-amber);
+    color: var(--ink);
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+  }
+  .newsletter-form button:hover { filter: brightness(1.08); }
+  .form-status {
+    width: 100%;
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-teal);
+    min-height: 1em;
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+</style>
+
+<script>
+  // Shared submit handler for both the newsletter and pendaftaran forms.
+  // Sends a simple POST to the Apps Script Web App as x-www-form-urlencoded
+  // so it works without a CORS preflight.
+  document.querySelectorAll('form[data-endpoint]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const el = form as HTMLFormElement;
+      const endpoint = el.dataset.endpoint;
+      const status = el.querySelector('.form-status');
+      const button = el.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      if (!endpoint || endpoint.includes('REPLACE_WITH_DEPLOYMENT_ID')) {
+        if (status) status.textContent = 'Form belum terhubung ke Apps Script — lihat langkah 3 di roadmap.';
+        return;
+      }
+      const data = new FormData(el);
+      data.append('type', el.dataset.type || '');
+      if (button) button.disabled = true;
+      if (status) status.textContent = 'Mengirim...';
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: new URLSearchParams(data as unknown as Record<string, string>),
+        });
+        if (status) status.textContent = 'Terkirim. Terima kasih!';
+        el.reset();
+      } catch (err) {
+        if (status) status.textContent = 'Gagal mengirim, coba lagi.';
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  });
+</script>

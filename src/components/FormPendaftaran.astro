@@ -1,0 +1,72 @@
+---
+// Posts to the Google Apps Script Web App (Sheet: Pendaftaran).
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/REPLACE_WITH_DEPLOYMENT_ID/exec';
+---
+<form class="pendaftaran-form" data-endpoint={APPS_SCRIPT_URL} data-type="pendaftaran">
+  <div class="field">
+    <label for="nama">Nama lengkap</label>
+    <input id="nama" name="nama" type="text" required autocomplete="name" />
+  </div>
+  <div class="field">
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required autocomplete="email" />
+  </div>
+  <div class="field">
+    <label for="negara">Negara / kota saat ini</label>
+    <input id="negara" name="negara" type="text" required placeholder="mis. Berlin, Jerman" />
+  </div>
+  <div class="field">
+    <label for="cerita">Cerita apa yang ingin kamu bagikan?</label>
+    <textarea id="cerita" name="cerita" rows="4" required></textarea>
+  </div>
+  <button type="submit">Kirim Pendaftaran</button>
+  <p class="form-status" role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .pendaftaran-form {
+    display: grid;
+    gap: 1.1rem;
+    max-width: 34rem;
+  }
+  .field { display: grid; gap: 0.4rem; }
+  .field label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--ink-muted);
+    letter-spacing: 0.02em;
+  }
+  .field input,
+  .field textarea {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 6px;
+    padding: 0.7rem 0.9rem;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    resize: vertical;
+  }
+  .field input:focus,
+  .field textarea:focus { border-color: var(--accent-amber); }
+  .pendaftaran-form button {
+    justify-self: start;
+    background: var(--accent-amber);
+    color: var(--ink);
+    border: none;
+    border-radius: 6px;
+    padding: 0.8rem 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .pendaftaran-form button:hover { filter: brightness(1.08); }
+  .form-status {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-teal);
+    min-height: 1em;
+  }
+</style>

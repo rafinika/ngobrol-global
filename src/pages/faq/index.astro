@@ -1,0 +1,86 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const semuaFaq = await getCollection('faq');
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: semuaFaq.map((f) => ({
+    '@type': 'Question',
+    name: f.data.pertanyaan,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      // Plain-text render of the markdown body for the schema payload.
+      text: f.body.replace(/[#*_`[\]]/g, '').trim(),
+    },
+  })),
+};
+---
+<Base title="FAQ" description="Pertanyaan yang sering diajukan seputar Ngobrol Global — pendaftaran tamu, proses seleksi, dan produksi episode.">
+  <section class="faq-hero">
+    <p class="eyebrow">FAQ</p>
+    <h1>Pertanyaan yang sering diajukan</h1>
+    <p class="lede">Kumpulan jawaban dari pertanyaan yang paling sering muncul dari calon tamu dan pendengar.</p>
+  </section>
+
+  <section class="faq-list">
+    {semuaFaq.map((f) => (
+      <details class="faq-item" id={f.slug}>
+        <summary>{f.data.pertanyaan}</summary>
+        <div class="faq-answer" set:html={f.rendered?.html} />
+      </details>
+    ))}
+  </section>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Base>
+
+<style>
+  .faq-hero {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent-amber);
+    margin: 0 0 1rem;
+  }
+  .faq-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 1rem;
+  }
+  .lede { max-width: 48ch; color: var(--ink-muted); font-size: 1.05rem; }
+
+  .faq-list {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem);
+    display: grid;
+    gap: 1rem;
+  }
+  .faq-item {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+  }
+  .faq-item summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .faq-answer {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-muted);
+  }
+  .faq-answer :global(a) { color: var(--accent-amber); }
+</style>

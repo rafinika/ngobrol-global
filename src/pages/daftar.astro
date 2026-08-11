@@ -1,0 +1,47 @@
+---
+import Base from '../layouts/Base.astro';
+import FormPendaftaran from '../components/FormPendaftaran.astro';
+---
+<Base title="Daftar Jadi Tamu" description="Daftar untuk menjadi tamu di Ngobrol Global dan bagikan cerita kamu.">
+  <section class="daftar-hero">
+    <p class="eyebrow">DAFTAR JADI TAMU</p>
+    <h1>Punya cerita dari kotamu?</h1>
+    <p class="lede">
+      Ngobrol Global selalu mencari perspektif baru. Isi form di bawah dan tim
+      kami akan menghubungi lewat email jika ceritamu cocok untuk episode
+      mendatang.
+    </p>
+  </section>
+
+  <section class="daftar-form-section">
+    <FormPendaftaran />
+  </section>
+</Base>
+
+<style>
+  .daftar-hero {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    color: var(--accent-amber);
+    margin: 0 0 1rem;
+  }
+  .daftar-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 1rem;
+  }
+  .lede { max-width: 48ch; color: var(--ink-muted); font-size: 1.05rem; }
+
+  .daftar-form-section {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem);
+  }
+</style>

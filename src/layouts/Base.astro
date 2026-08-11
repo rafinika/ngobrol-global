@@ -1,0 +1,211 @@
+---
+interface Props {
+  title: string;
+  description?: string;
+}
+const {
+  title,
+  description = 'Ngobrol Global — jembatan cerita menuju dunia global. Podcast wawancara lintas negara.',
+} = Astro.props;
+---
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} · Ngobrol Global</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.bunny.net" />
+    <link
+      href="https://fonts.bunny.net/css?family=fraunces:400,500,600,600i,700|ibm-plex-sans:400,500,600|ibm-plex-mono:400,500"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#konten">Langsung ke konten</a>
+    <header class="site-header">
+      <a class="wordmark" href="/">
+        <span class="wordmark-mark" aria-hidden="true">NG</span>
+        <span class="wordmark-text">Ngobrol Global</span>
+      </a>
+      <nav class="site-nav" aria-label="Navigasi utama">
+        <a href="/#cerita">Cerita</a>
+        <a href="/#tentang">Tentang</a>
+        <a href="/faq">FAQ</a>
+        <a href="/daftar" class="nav-cta">Daftar Jadi Tamu</a>
+      </nav>
+    </header>
+
+    <main id="konten">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-top">
+        <p class="footer-tagline">Jembatan cerita menuju dunia global.</p>
+        <div class="footer-links">
+          <a href="/daftar">Daftar jadi tamu</a>
+          <a href="/faq">FAQ</a>
+          <a href="https://instagram.com/ngobrolglobal" target="_blank" rel="noopener">Instagram</a>
+          <a href="mailto:ngobrolglobal@altruism.id">Email</a>
+        </div>
+      </div>
+      <p class="footer-fine">&copy; {new Date().getFullYear()} Ngobrol Global. Dibuat dengan Astro.</p>
+    </footer>
+
+    <style is:global>
+      :root {
+        --bg-night: #12172a;
+        --bg-night-soft: #1a2140;
+        --bg-panel: #efe7d8;
+        --ink: #1c2033;
+        --ink-soft: #e7e2d2;
+        --ink-muted: #a9aec4;
+        --accent-amber: #e2a33b;
+        --accent-teal: #4a9b8e;
+        --line: rgba(231, 226, 210, 0.16);
+        --line-strong: rgba(231, 226, 210, 0.32);
+
+        --font-display: 'Fraunces', 'Iowan Old Style', serif;
+        --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+        --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+      }
+
+      * { box-sizing: border-box; }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg-night);
+        color: var(--ink-soft);
+        font-family: var(--font-body);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--accent-amber);
+        color: var(--ink);
+        padding: 0.75rem 1.25rem;
+        z-index: 100;
+        font-family: var(--font-mono);
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+      }
+
+      a { color: inherit; }
+
+      :focus-visible {
+        outline: 2px solid var(--accent-amber);
+        outline-offset: 3px;
+      }
+
+      /* ---- Header ---- */
+      .site-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.5rem;
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 1.75rem clamp(1.25rem, 4vw, 2.5rem) 0.5rem;
+      }
+      .wordmark {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        text-decoration: none;
+        color: var(--ink-soft);
+      }
+      .wordmark-mark {
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+        border: 1px solid var(--line-strong);
+        border-radius: 4px;
+        padding: 0.3rem 0.45rem;
+        color: var(--accent-amber);
+      }
+      .wordmark-text {
+        font-family: var(--font-display);
+        font-weight: 600;
+        font-size: 1.15rem;
+        letter-spacing: 0.01em;
+      }
+      .site-nav {
+        display: flex;
+        align-items: center;
+        gap: clamp(1rem, 3vw, 2rem);
+        font-family: var(--font-mono);
+        font-size: 0.85rem;
+      }
+      .site-nav a {
+        text-decoration: none;
+        color: var(--ink-muted);
+        transition: color 0.15s ease;
+      }
+      .site-nav a:hover { color: var(--ink-soft); }
+      .nav-cta {
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        padding: 0.45rem 0.9rem;
+        color: var(--ink-soft) !important;
+      }
+      .nav-cta:hover {
+        border-color: var(--accent-amber);
+        color: var(--accent-amber) !important;
+      }
+
+      /* ---- Footer ---- */
+      .site-footer {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 2.5rem clamp(1.25rem, 4vw, 2.5rem) 3rem;
+        border-top: 1px solid var(--line);
+        margin-top: 4rem;
+      }
+      .footer-top {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem 2rem;
+        align-items: baseline;
+        justify-content: space-between;
+      }
+      .footer-tagline {
+        font-family: var(--font-display);
+        font-style: italic;
+        font-size: 1.05rem;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        font-family: var(--font-mono);
+        font-size: 0.8rem;
+      }
+      .footer-links a { text-decoration: none; color: var(--ink-muted); }
+      .footer-links a:hover { color: var(--accent-amber); }
+      .footer-fine {
+        margin: 2rem 0 0;
+        font-family: var(--font-mono);
+        font-size: 0.75rem;
+        color: var(--ink-muted);
+      }
+    </style>
+  </body>
+</html>

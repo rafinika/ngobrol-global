@@ -1,0 +1,117 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, getEntry, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const semuaNarasumber = await getCollection('narasumber');
+  return semuaNarasumber.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'narasumber'>;
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const episodeEntries = await Promise.all(
+  entry.data.episode.map((ref) => getEntry(ref))
+);
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: entry.data.nama,
+  jobTitle: entry.data.peran,
+  homeLocation: entry.data.kota
+    ? `${entry.data.kota}, ${entry.data.negara}`
+    : entry.data.negara,
+};
+---
+<Base title={entry.data.nama} description={entry.data.ringkasan}>
+  <article class="profil">
+    <a class="back-link" href="/#cerita">&larr; Semua cerita</a>
+    <p class="profil-origin">{entry.data.kota ? `${entry.data.kota}, ` : ''}{entry.data.negara}</p>
+    <h1>{entry.data.nama}</h1>
+    <p class="profil-peran">{entry.data.peran}</p>
+
+    <div class="profil-body">
+      <Content />
+    </div>
+
+    {episodeEntries.length > 0 && (
+      <div class="profil-episode">
+        <h2>Episode bersama {entry.data.nama}</h2>
+        <ul>
+          {episodeEntries.map((ep) => ep && (
+            <li>
+              <a href={`/cerita/${ep.slug}`}>{ep.data.title}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )}
+  </article>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</Base>
+
+<style>
+  .profil {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2.5rem) 2rem;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+  .back-link:hover { color: var(--accent-amber); }
+  .profil-origin {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin: 0 0 0.75rem;
+  }
+  .profil h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    line-height: 1.15;
+    margin: 0 0 0.5rem;
+  }
+  .profil-peran {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--ink-muted);
+    margin: 0 0 1.75rem;
+  }
+  .profil-body {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .profil-episode {
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .profil-episode h2 {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    margin: 0 0 0.75rem;
+  }
+  .profil-episode ul { list-style: none; margin: 0; padding: 0; }
+  .profil-episode a {
+    color: var(--accent-amber);
+    text-decoration: none;
+  }
+  .profil-episode a:hover { text-decoration: underline; }
+</style>

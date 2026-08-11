@@ -1,0 +1,115 @@
+---
+import Base from '../../layouts/Base.astro';
+import Komentar from '../../components/Komentar.astro';
+import { getCollection, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+  const semuaCerita = await getCollection('cerita');
+  return semuaCerita.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'cerita'>;
+}
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const tanggalFormatted = new Intl.DateTimeFormat('id-ID', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(entry.data.tanggal);
+---
+<Base title={entry.data.title} description={entry.data.ringkasan}>
+  <article class="story">
+    <a class="back-link" href="/#cerita">&larr; Semua cerita</a>
+    <p class="story-origin">{entry.data.kota ? `${entry.data.kota}, ` : ''}{entry.data.negara} · {tanggalFormatted}</p>
+    <h1>{entry.data.title}</h1>
+    <p class="story-meta">
+      <span>Bersama {entry.data.tamu}</span>
+      {entry.data.durasi && <span>· {entry.data.durasi}</span>}
+    </p>
+
+    {entry.data.audioUrl && (
+      <div class="audio-wrap">
+        <audio controls src={entry.data.audioUrl}></audio>
+      </div>
+    )}
+
+    {entry.data.tags.length > 0 && (
+      <ul class="tags">
+        {entry.data.tags.map((tag) => <li>#{tag}</li>)}
+      </ul>
+    )}
+
+    <div class="story-body">
+      <Content />
+    </div>
+  </article>
+
+  <Komentar slug={entry.slug} />
+</Base>
+
+<style>
+  .story {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: clamp(2.5rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2.5rem) 2rem;
+  }
+  .back-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--ink-muted);
+    text-decoration: none;
+    margin-bottom: 2rem;
+  }
+  .back-link:hover { color: var(--accent-amber); }
+  .story-origin {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent-teal);
+    margin: 0 0 0.75rem;
+  }
+  .story h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.9rem, 5vw, 2.7rem);
+    line-height: 1.15;
+    margin: 0 0 0.75rem;
+  }
+  .story-meta {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin: 0 0 1.75rem;
+  }
+  .story-meta span + span { margin-left: 0.5rem; }
+  .audio-wrap { margin-bottom: 1.75rem; }
+  .audio-wrap audio { width: 100%; }
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    padding: 0;
+    margin: 0 0 2rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--accent-teal);
+  }
+  .story-body {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+  }
+  .story-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    margin-top: 2rem;
+  }
+  .story-body :global(a) { color: var(--accent-amber); }
+</style>
