@@ -1,0 +1,145 @@
+diff --git a/src/content/cerita/01-belanda-kincir-angin.md b/src/content/cerita/01-belanda-kincir-angin.md
+deleted file mode 100644
+index 880f577..0000000
+--- a/src/content/cerita/01-belanda-kincir-angin.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-title: "Kuliah S2 di Belanda sebagai Profesional & Ayah"
+-tamu: "Rahmat R. A."
+-narasumber: "rahmat-r-a"
+-negara: "Belanda"
+-tanggal: 2025-07-20
+-ringkasan: "Strategi, beasiswa, dan kehidupan di Negeri Kincir Angin — cerita Rahmat menjalani S2 di Belanda sambil tetap menjadi profesional dan ayah."
+-tags: ["belanda", "s2-sambil-bekerja", "beasiswa"]
+-unggulan: false
+-primaryKeyword: "kuliah S2 Belanda sambil bekerja"
+-secondaryKeywords: ["beasiswa S2 Belanda", "kuliah S2 sebagai profesional dan ayah"]
+----
+-
+-## Tentang episode ini
+-
+-Episode 1: "Strategi, Beasiswa, dan Kehidupan di Negeri Kincir Angin."
+-Rahmat R. A. berbagi perjalanannya menempuh studi S2 di Belanda sambil tetap
+-menjalankan peran sebagai profesional dan ayah — sisi kehidupan studi lanjut
+-yang jarang dibahas terbuka.
+-
+-<!-- Catatan migrasi: rangkuman lengkap, shownotes, dan link rekaman belum
+-tersedia dari sumber Notion. Lengkapi setelah data diekspor. Tanggal di atas
+-adalah perkiraan urutan rilis — konfirmasi tanggal pasti sebelum publish. -->
+diff --git a/src/content/cerita/02-swedia-negara-nordik.md b/src/content/cerita/02-swedia-negara-nordik.md
+deleted file mode 100644
+index dbda2b7..0000000
+--- a/src/content/cerita/02-swedia-negara-nordik.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-title: "Studi S2 & Profesionalisme di Swedia"
+-tamu: "Yahya Nashihur Rodhi"
+-narasumber: "yahya-nashihur-rodhi"
+-negara: "Swedia"
+-tanggal: 2025-08-24
+-ringkasan: "Strategi, beasiswa, dan kehidupan di negara Nordik — Yahya berbagi pengalaman menjalani studi S2 sekaligus membangun sisi profesionalnya di Swedia."
+-tags: ["swedia", "nordik", "s2-sambil-bekerja"]
+-unggulan: false
+-primaryKeyword: "kuliah S2 Swedia"
+-secondaryKeywords: ["beasiswa S2 negara Nordik", "kehidupan mahasiswa Indonesia di Swedia"]
+----
+-
+-## Tentang episode ini
+-
+-Episode 2: "Strategi, Beasiswa, dan Kehidupan di Negara Nordik."
+-Yahya Nashihur Rodhi berbagi bagaimana menjalani studi S2 di Swedia sambil
+-tetap mengembangkan sisi profesionalnya, termasuk menavigasi budaya kerja
+-khas Nordik.
+-
+-<!-- Catatan migrasi: rangkuman lengkap, shownotes, dan link rekaman belum
+-tersedia dari sumber Notion. Lengkapi setelah data diekspor. Tanggal di atas
+-adalah perkiraan urutan rilis — konfirmasi tanggal pasti sebelum publish. -->
+diff --git a/src/content/cerita/03-korea-ai-energi.md b/src/content/cerita/03-korea-ai-energi.md
+deleted file mode 100644
+index 1135e41..0000000
+--- a/src/content/cerita/03-korea-ai-energi.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-title: "AI & Energi: Studi S2 sampai PhD di Korea"
+-tamu: "Muhammad Ihza F.G."
+-narasumber: "muhammad-ihza-fg"
+-negara: "Korea Selatan"
+-tanggal: 2025-09-21
+-ringkasan: "Strategi, beasiswa, dan kehidupan di Negeri Gingseng — perjalanan interdisciplinary Ihza dari Matematika ke AI & Energi, menempuh S2 hingga PhD di Korea Selatan."
+-tags: ["korea-selatan", "ai", "energi", "phd"]
+-unggulan: false
+-primaryKeyword: "studi S2 PhD Korea Selatan"
+-secondaryKeywords: ["beasiswa PhD AI Korea", "kuliah teknik energi di Korea"]
+----
+-
+-## Tentang episode ini
+-
+-Episode 3: "Strategi, Beasiswa, dan Kehidupan di Negeri Gingseng."
+-Muhammad Ihza F.G. membagikan perjalanan akademiknya yang interdisciplinary —
+-dari latar belakang Matematika, menempuh S2 hingga PhD di Korea Selatan
+-dengan fokus riset AI dan Energi.
+-
+-<!-- Catatan migrasi: rangkuman lengkap, shownotes, dan link rekaman belum
+-tersedia dari sumber Notion. Lengkapi setelah data diekspor. Tanggal di atas
+-adalah perkiraan urutan rilis — konfirmasi tanggal pasti sebelum publish. -->
+diff --git a/src/content/cerita/04-us-international-affairs-georgetown.md b/src/content/cerita/04-us-international-affairs-georgetown.md
+deleted file mode 100644
+index cd73b5d..0000000
+--- a/src/content/cerita/04-us-international-affairs-georgetown.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-title: "Studi S2 Jurusan International Affairs: Dari ITB sampai Georgetown US"
+-tamu: "Axl Cezeliano"
+-narasumber: "axl-cezeliano"
+-negara: "Amerika Serikat"
+-kota: "Washington, D.C."
+-tanggal: 2025-10-19
+-ringkasan: "Strategi, beasiswa, dan kehidupan di Negeri Paman Sam — perjalanan Axl dari ITB menuju studi S2 International Affairs di Georgetown University."
+-tags: ["amerika-serikat", "international-affairs", "georgetown"]
+-unggulan: false
+-primaryKeyword: "kuliah S2 International Affairs Amerika Serikat"
+-secondaryKeywords: ["beasiswa S2 Georgetown University", "dari ITB ke Amerika Serikat"]
+----
+-
+-## Tentang episode ini
+-
+-Episode 4: "Strategi, Beasiswa, dan Kehidupan di Negeri Paman Sam."
+-Axl Cezeliano berbagi perjalanannya dari studi S1 di ITB menuju studi S2
+-jurusan International Affairs di Georgetown University, Amerika Serikat.
+-
+-<!-- Catatan migrasi: rangkuman lengkap, shownotes, dan link rekaman belum
+-tersedia dari sumber Notion. Lengkapi setelah data diekspor. Tanggal di atas
+-adalah perkiraan urutan rilis — konfirmasi tanggal pasti sebelum publish. -->
+diff --git a/src/content/cerita/05-belgia-fire-safety.md b/src/content/cerita/05-belgia-fire-safety.md
+deleted file mode 100644
+index 81d900d..0000000
+--- a/src/content/cerita/05-belgia-fire-safety.md
++++ /dev/null
+@@ -1,23 +0,0 @@
+----
+-title: "Dari Aceh ke Belgia: Perjalanan Insinyur Fire Safety Global"
+-tamu: "M. Jerry A."
+-narasumber: "m-jerry-a"
+-negara: "Belgia"
+-kota: "Ghent"
+-tanggal: 2025-11-16
+-ringkasan: "PhD Fire Engineering di Ghent University Belgium melalui beasiswa employment, dengan fokus pada simulasi kebakaran dan proteksi kehidupan."
+-tags: ["belgia", "fire-safety-engineering", "beasiswa-employment"]
+-unggulan: false
+-primaryKeyword: "PhD Fire Engineering Belgia"
+-secondaryKeywords: ["beasiswa employment Ghent University", "insinyur fire safety Indonesia"]
+----
+-
+-## Tentang episode ini
+-
+-Episode 5: perjalanan M. Jerry A. dari Aceh ke Belgia untuk menempuh PhD Fire
+-Engineering di Ghent University melalui beasiswa employment, dengan fokus
+-riset pada simulasi kebakaran dan proteksi kehidupan.
+-
+-<!-- Catatan migrasi: rangkuman lengkap, shownotes, dan link rekaman belum
+-tersedia dari sumber Notion. Lengkapi setelah data diekspor. Tanggal di atas
+-adalah perkiraan urutan rilis — konfirmasi tanggal pasti sebelum publish. -->
