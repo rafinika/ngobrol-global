@@ -5,7 +5,7 @@ kota: "Ghent"
 peran: "PhD Fire Engineering, Ghent University"
 bidang: "Fire Safety Engineering"
 ringkasan: "Jerry menempuh PhD Fire Engineering di Ghent University, Belgia melalui beasiswa employment, dengan fokus riset pada simulasi kebakaran dan proteksi kehidupan."
-episode: ["05-belgia-fire-safety"]
+episode: ["dari-aceh-ke-belgia-fire-safety-global"]
 ---
 
 M. Jerry A. berangkat dari Aceh menuju Belgia untuk menempuh PhD Fire

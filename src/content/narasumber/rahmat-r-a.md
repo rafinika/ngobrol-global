@@ -4,7 +4,7 @@ negara: "Belanda"
 peran: "Profesional & mahasiswa S2 sambil menjadi ayah"
 bidang: "Studi Lanjut Sambil Bekerja"
 ringkasan: "Rahmat menempuh S2 di Belanda sebagai seorang profesional sekaligus ayah, dan berbagi strategi menjalani studi, beasiswa, dan kehidupan keluarga di Negeri Kincir Angin."
-episode: ["01-belanda-kincir-angin"]
+episode: ["kuliah-s2-belanda-profesional-ayah"]
 ---
 
 Rahmat R. A. menjalani studi S2 di Belanda sambil tetap menjalankan peran sebagai

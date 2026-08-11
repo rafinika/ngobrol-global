@@ -5,7 +5,7 @@ kota: "Washington, D.C."
 peran: "Mahasiswa S2 International Affairs"
 bidang: "International Affairs"
 ringkasan: "Axl menempuh S2 jurusan International Affairs, dari ITB sampai Georgetown University — berbagi strategi, beasiswa, dan kehidupan di Negeri Paman Sam."
-episode: ["04-us-international-affairs-georgetown"]
+episode: ["studi-s2-international-affairs-georgetown"]
 ---
 
 Axl Cezeliano menempuh perjalanan akademik dari S1 di ITB menuju studi S2

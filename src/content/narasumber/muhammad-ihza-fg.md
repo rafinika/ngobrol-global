@@ -4,7 +4,7 @@ negara: "Korea Selatan"
 peran: "Peneliti S2 hingga PhD, AI & Energi"
 bidang: "AI & Energi"
 ringkasan: "Perjalanan interdisciplinary Ihza dari Matematika ke AI dan Energi, menempuh S2 hingga PhD di Korea Selatan — mulai dari strategi beasiswa hingga kehidupan di Negeri Gingseng."
-episode: ["03-korea-ai-energi"]
+episode: ["studi-s2-phd-korea-ai-energi"]
 ---
 
 Muhammad Ihza F.G. menempuh jenjang S2 hingga PhD di Korea Selatan dengan

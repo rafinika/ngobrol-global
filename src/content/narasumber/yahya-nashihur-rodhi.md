@@ -4,7 +4,7 @@ negara: "Swedia"
 peran: "Mahasiswa S2 & profesional"
 bidang: "Studi Lanjut Sambil Bekerja"
 ringkasan: "Yahya berbagi strategi, beasiswa, dan kehidupan menjalani studi S2 sekaligus profesionalisme di Swedia, salah satu negara Nordik favorit pelajar Indonesia."
-episode: ["02-swedia-negara-nordik"]
+episode: ["studi-s2-profesionalisme-swedia"]
 ---
 
 Yahya Nashihur Rodhi menempuh studi S2 di Swedia sambil membangun sisi
