@@ -79,5 +79,3 @@ Studi di Swedia bukan hanya tentang meraih gelar, tapi juga perjalanan menjadi m
 
 **Tonton rekaman lengkap:** [Rekaman Eps. 2 di YouTube](https://youtu.be/iFQv93aENSM)
 **Materi presentasi:** [Materi Eps. 2](https://drive.google.com/file/d/1jQo783cNG_wOg3GLhfjtQyUBCJWMxmfu/view?usp=sharing)
-
-> ⚠️ **Catatan pengecekan:** link YouTube di atas sama persis dengan link Eps. 3 (`iFQv93aENSM`) di sumber Notion. Kemungkinan salah salin saat pengisian data — cek ulang rekaman aslinya sebelum publish.
