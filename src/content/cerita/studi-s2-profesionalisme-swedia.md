@@ -7,7 +7,7 @@ kampus: "KTH Royal Institute of Technology"
 negara: "Swedia"
 bidang: "Civil and Architectural Engineering"
 beasiswa: ""
-tanggal: "" # TODO: isi tanggal publikasi episode
+tanggal: ""
 primaryKeyword: "kuliah s2 swedia beasiswa"
 secondaryKeywords:
   - "KTH Royal Institute of Technology"
