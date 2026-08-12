@@ -7,14 +7,14 @@ kampus: "Kyungpook National University"
 negara: "Korea Selatan"
 bidang: "AI & Energi (Convergence and Fusion System Engineering)"
 beasiswa: ""
-tanggal: "" # TODO: isi tanggal publikasi episode
+tanggal: ""
 primaryKeyword: "studi S2 S3 Korea Selatan beasiswa"
 secondaryKeywords:
   - "PhD AI energi Korea"
   - "BK21 Global Korea Scholarship"
   - "pivot matematika ke AI"
 schemaType: "Event"
-youtubeUrl: "https://youtu.be/iFQv93aENSM"
+youtubeUrl: "https://youtu.be/Z8Ch3wvaehA?si=-4uQrE4SWLV5rscv"
 materiUrl: "https://docs.google.com/presentation/d/1wkVyu-mcYpv_I6nxrsB2iqvkuF-kjiFR/edit?usp=sharing&ouid=114433195304945559374&rtpof=true&sd=true"
 ---
 
@@ -106,5 +106,3 @@ Kak Ihza memulai S1 di matematika murni, kemudian melanjutkan S2 & S3 di bidang 
 
 **Tonton rekaman lengkap:** [Rekaman Eps. 3 di YouTube](https://youtu.be/iFQv93aENSM)
 **Materi presentasi:** [Materi Eps. 3](https://docs.google.com/presentation/d/1wkVyu-mcYpv_I6nxrsB2iqvkuF-kjiFR/edit?usp=sharing&ouid=114433195304945559374&rtpof=true&sd=true)
-
-> ⚠️ **Catatan pengecekan:** link YouTube di atas sama persis dengan link Eps. 2 (`iFQv93aENSM`) di sumber Notion. Kemungkinan salah salin saat pengisian data — cek ulang rekaman aslinya sebelum publish.
